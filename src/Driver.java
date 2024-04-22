@@ -10,9 +10,9 @@ public class Driver {
         tree.preOrder();
 
 
+        System.out.println(tree.DFS(1));
 
 
-
-        tree.DFS(1);
+        System.out.println(tree.BFS(1));
     }
 }

@@ -65,6 +65,7 @@ public class Tree {
 
     //DFS Search
     public String DFS(int value){
+        System.out.println();
         Stack stack=new Stack();
         stack.push(this.root);
         while(!stack.isEmpty()){
@@ -78,6 +79,34 @@ public class Tree {
                 }
                 if(temp.left!=null){
                     stack.push(temp.left);
+                }
+            }
+        }
+        return "not found";
+    }
+    public String BFS(int value) {
+        System.out.println();
+        int level=0;
+        if(this.root ==null){
+            return "tree is Empty";
+        }else{
+            Queue queue=new Queue();
+            queue.enqueue(this.root);
+
+            while(!queue.isEmpty()){
+                TreeNode temp=queue.dequeue();// tree node ekat assigned karnn puluwan wenne  dequeue method ekedi return karanne tree node ekak
+                System.out.print("--->"+temp.data);
+                if(temp.data==value){
+                    return "level="+ level;
+                }else{
+                    if(temp.right!=null){
+                        queue.enqueue(temp.right);
+                        level++;
+                    }
+                    if(temp.left!=null){
+                        queue.enqueue(temp.left);
+                        level++;
+                    }
                 }
             }
         }
