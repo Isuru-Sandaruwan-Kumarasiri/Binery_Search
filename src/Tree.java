@@ -112,108 +112,64 @@ public class Tree {
         }
         return "not found";
     }
-    public int getdepth(char letter) {
-        int depth = Level(root, letter, 0);
-        return depth;
-    }
-
-    private int Level(TreeNode root, char letter, int level) {
-        if (root == null) {
-            return 0;
-        }
-        if (root.letter == letter) {
-            return level;
-        }
-        int n = Level(root.left, letter, level + 1);
-        if (n != 0) {
-            return n;
-        }
-        n = Level(root.right, letter, level + 1);
-        return n;
-    }
-
-    //last methods are created for integer value. It will be set to character.
-
-    //search
-    public TreeNode searchNode(){
-        if(root == null){
-            return null;
-
-        } else {
-            if(root.data == target){
+    private TreeNode SearchNode(TreeNode root,int target){
+        if(root==null){
+            return  null;
+        }else{
+            if(root.data==target){
                 return root;
-
-            } else if(target > root.data){
-                return searchNode(root.right, target);
-
-            } else {
-                return searchNode(root.left, target);
+            } else if (target>root.data) {
+                return SearchNode(root.right,target);
+            }else {
+                return SearchNode(root.left,target);
             }
         }
     }
-
-    public void search(int target){
-
-        TreeNode temp = searchNode(root, target);
-
-        if(temp == null){
-            System.out.println("Value not Found!");
-        } else {
-            System.out.println("Value Found! " + target);
+    public void Search(int target){
+        TreeNode temp=SearchNode(this.root,target);
+        if(temp==null){
+            System.out.println("value not found");
+        }else{
+            System.out.println("value found");
         }
     }
-
-    //delete
-    public void delete(int target){
-        this.root = deleteNode(this.root, target);
-    }
-
-    private TreeNode deleteNode(TreeNode root, int target){
-        if(root == null){
+    public TreeNode delete(TreeNode root ,int target){
+        if(root==null){
             return root;
         }
+        if(target<root.data){
+            root.left=delete(root.left,target);
+        }else if(target>root.data){
+            root.right=delete(root.right,target);
+        }else {
+            if(root.left==null || root.right==null){
+                TreeNode temp=root.left!=null ? root.left:root.right;
 
-        if(taget < root.data){
-            root.left = deleteNode(root.left, target);
+                if (temp != null) {
+                    return temp;
+                } else {
+                    return null;
+                }
+            }else{
+                TreeNode successor=getSuccessor(root);
+                root.data=successor.data;
 
-        } else if(){
-            root.right = deleteNode(root.right, target);
-
-        } else {
-
-            if(root.left == null && root.right == null){
-                System.out.println("Deleting " + target);
-                return null;
-
-            } else if(root.left == null){
-                System.out.println("Deleting " + target);
-                return root.right;
-
-            } else if(root.right == null){
-                System.out.println("Deleting " + target);
-                return root.leftt;
-
-            } else {
-
-                int minValue = minVal(root.right);
-                root.data = minValue;
-                root.right = deleteNode(root.right, minValue);
-                System.out.println("Deleting " + target);
+                root.right=delete(root.right,successor.data);
+                return root;
             }
         }
         return root;
     }
-
-    //searching for minimun value
-    int minVal(TreeNode root){
-        int minV = root.data;
-
-        while(root.left != null){
-            minV = root.left.data;
-            root = root.left;
+    public TreeNode getSuccessor(TreeNode currentNode){
+        if(currentNode==null){
+            return null;
         }
-        return minV;
+        TreeNode temp=currentNode.right;
+
+        while(temp.left!=null){
+            temp=temp.left;
+        }
+        return temp;
     }
 
-} 
 }

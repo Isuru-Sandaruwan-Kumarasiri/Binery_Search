@@ -14,5 +14,7 @@ public class Driver {
 
 
         System.out.println(tree.BFS(1));
+
+        tree.Search(4);
     }
 }
