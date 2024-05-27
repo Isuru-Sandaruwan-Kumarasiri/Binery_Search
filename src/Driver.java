@@ -5,16 +5,20 @@ public class Driver {
         tree.insertNode(4);
         tree.insertNode(7);
         tree.insertNode(1);
-        tree.postOrder();
+        tree.insertNode(2);
+        tree.insertNode(6);
+//        tree.postOrder();
+//        tree.inorder();
+//        tree.preOrder();
+//
+//
+//        System.out.println(tree.DFS(1));
+//
+//
+//        System.out.println(tree.BFS(1));
+
         tree.inorder();
-        tree.preOrder();
-
-
-        System.out.println(tree.DFS(1));
-
-
-        System.out.println(tree.BFS(1));
-
-        tree.Search(4);
+        tree.nodeDelete(7);
+        tree.inorder();
     }
 }

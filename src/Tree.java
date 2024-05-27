@@ -133,10 +133,11 @@ public class Tree {
             System.out.println("value found");
         }
     }
-    public TreeNode delete(TreeNode root ,int target){
-        if(root==null){
-            return root;
-        }
+    public void nodeDelete(int target){
+        this.root=delete(this.root,target);
+    }
+    private TreeNode delete(TreeNode root ,int target){
+        if(root==null) return root;
         if(target<root.data){
             root.left=delete(root.left,target);
         }else if(target>root.data){
@@ -160,7 +161,7 @@ public class Tree {
         }
         return root;
     }
-    public TreeNode getSuccessor(TreeNode currentNode){
+     private   TreeNode getSuccessor(TreeNode currentNode){
         if(currentNode==null){
             return null;
         }
